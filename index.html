@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+<head>
+  <title>Random Student Picker</title>
+  <script src="rand.js"></script>
+  <link href="rand.css" type="text/css" rel="stylesheet">
+  <meta name="viewport" content="width=600">
+</head>
+
+<body id="body">
+    
+ 
+  <h1 id="header">This is jonTronic's fancy student picker</h1>
+    
+<div class="container">   
+  <h3 id="choice">  &nbsp; </h3>
+     <button id="pickButton" class="button btnPush btnBlueGreen">PICK</button>
+     
+    
+
+<!--
+    <div id="pickButtonTwo"  style="display:none;" class="answer_list" > Just Chilling</div>
+     <button onclick="myFunction()">Nothing</button>
+-->
+</div>     
+    
+  <img src="millennium-falcon.svg" id="image">
+  <h3 id="attendance">Attendance</h3>
+  <ul id=aList></ul>
+    
+</body>
+    
+<script>
+
+var  pickButton;
+var  header;
+var  body;
+var  choice;
+var  aList;   
+
+var students = [
+   "Kevin ",
+   "Jonathan ",
+   "Angel ",
+   "Eric ",
+   "Janette ",
+   "Desmond ",
+   "Ashiya ",
+   "Monica ",
+   "Susana ",
+   "Deborah ",
+   "Thomas ",
+   "Julissa ",
+   "Kyla ",
+   "John ",
+   "Shonica ",
+   "Krystal "
+];
+    
+
+var colors = [
+   'hotpink',
+   'orange',
+   'fuchsia', 0,
+   'lightblue', 0,
+   'black'
+];
+var cur = 0;
+
+document.addEventListener('DOMContentLoaded', () => {
+  console.log('hello rand.js');
+
+  body = document.getElementById('body');
+  header = document.getElementById('header');
+  pickButton = document.getElementById('pickButton');
+  choice = document.getElementById('choice');
+  aList = document.getElementById('aList');
+  pickButton.addEventListener('click', pickOnClick );
+  aList.addEventListener('click', aListOnClick );
+
+  // build the attendance list
+  for (let i=0; i<students.length; i++) {
+    let li = document.createElement('li');
+    li.innerText = students[i];
+    aList.append(li); 
+  }
+});
+    
+   
+
+var pickOnClick = function (event) {
+  console.log(students);
+  choice.innerHTML = '&nbsp;';
+  var randValue = Math.floor(Math.random() * students.length);
+  var rand = students[randValue];
+  var x = window.setInterval(() => {
+    if (colors[cur] === undefined) {
+      window.clearInterval(x);
+      cur = 0;
+      choice.innerText = rand;
+      students.splice(randValue, 1);
+      return;
+    }
+    if (colors[cur]) header.style.color = colors[cur];
+    if (colors[cur-1]) body.style.backgroundColor = colors[cur-1];
+    cur += 1;
+  }, 200);
+}
+
+    
+</script>    
+    
+    
+    
+
+</html>
